@@ -8,7 +8,7 @@ interface Props {
 const Tasks = ({tasks}: Props) => {
   return (
     <ul>
-       {tasks.map(task => <Task key={task.id} />)}
+       {tasks.map(task => <Task key={task.id} task={task} />)}
     </ul>
   );
 }
