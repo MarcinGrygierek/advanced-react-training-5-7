@@ -1,10 +1,14 @@
 import { Task } from './Task';
+import { SingleTask } from './types/task';
 
-const Tasks = () => {
+interface Props {
+    tasks: SingleTask[]
+}
+
+const Tasks = ({tasks}: Props) => {
   return (
     <ul>
-        <Task />
-        <Task />
+       {tasks.map(task => <Task key={task.id} />)}
     </ul>
   );
 }

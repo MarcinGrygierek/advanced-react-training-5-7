@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Form } from './Form';
 import { Tasks } from './Tasks';
-import { Task } from './types/task';
+import { SingleTask } from './types/task';
 
 const App = () => {
-  const [tasks, setTasks] = useState<Task[]>(
+  const [tasks, setTasks] = useState<SingleTask[]>(
     [
       {
-      id: uuid.v4(),
+      id: uuidv4(),
       name: 'Do groceries',
       createdAt: new Date()
     }, {
-      id: uuid.v4(),
+      id: uuidv4(),
       name: 'Mop the floor',
       createdAt: new Date()
     }
@@ -24,7 +24,7 @@ const App = () => {
       <div className="row">
         <div className="col-lg-6 col-md-8">
           <Form />
-          <Tasks />
+          <Tasks tasks={tasks} />
         </div>
       </div>
   </div>

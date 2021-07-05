@@ -1,4 +1,4 @@
-export interface Task {
+export interface SingleTask {
     id: string;
     name: string;
     createdAt: Date;
