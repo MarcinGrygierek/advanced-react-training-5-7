@@ -11,7 +11,7 @@ const Task = ({task, finishTask}: Props) => {
         <div className="card-body">
             <h2 className="cart-title">{task.name}</h2>
             <p>Created at: {task.createdAt.toLocaleString()}</p>
-            <button className='btn btn-lg btn-success'>Close</button>
+            <button className='btn btn-lg btn-success' onClick={() => finishTask(task.id)}>Close</button>
         </div>
     </li>
   )
