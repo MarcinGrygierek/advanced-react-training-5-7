@@ -10,11 +10,13 @@ const App = () => {
         {
           id: uuidv4(),
           name: 'Do groceries',
-          createdAt: new Date()
+          createdAt: new Date(),
+          finishedAt: null
         }, {
           id: uuidv4(),
           name: 'Mop the floor',
-          createdAt: new Date()
+          createdAt: new Date(),
+          finishedAt: null
       }
     ]
   );
@@ -29,12 +31,23 @@ const App = () => {
     }))
   }
 
+  
+  const reopenTask = (taskId: string) => {
+    setTasks(prevTasks => prevTasks.map(task => {
+      if(task.id === taskId) return {
+        ...task,
+        finishedAt: null
+      };
+      return task;
+    }))
+  }
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-lg-6 col-md-8">
           <Form />
-          <Tasks tasks={tasks} finishTask={finishTask} />
+          <Tasks tasks={tasks} finishTask={finishTask} reopenTask={reopenTask} />
         </div>
       </div>
   </div>
