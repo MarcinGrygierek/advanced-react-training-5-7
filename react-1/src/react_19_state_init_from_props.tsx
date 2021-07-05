@@ -11,8 +11,6 @@ const UserInfo = ({defaultName}: Props) => {
 }
 
 const App = () => {
-  
-
     return <UserInfo defaultName='Marcin' />
 }
 
