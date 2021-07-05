@@ -23,12 +23,14 @@ const Form = ({addNewTask}: Props) => {
             <h1 className='card-title'>
                 Create new task
             </h1>
-            <div className="input-group mb-3">
-                <form onSubmit={handleSubmit}>
+       
+            <form onSubmit={handleSubmit}>
+                <div className="input-group mb-3">
                     <input value={value} onChange={handleValueChange} type="text" className="form-control" placeholder="Task name" aria-label="Task name" aria-describedby="button-addon2" />
                     <button className="btn btn-primary" type="submit" id="button-addon2">Create</button>
-                </form>
-            </div>
+                    </div>
+            </form>
+          
         </div>
     </div>
     );
