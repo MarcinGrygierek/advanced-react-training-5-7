@@ -1,6 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
-const Form = () => {
+interface Props {
+    addNewTask: (name: string) => void;
+}
+
+const Form = ({addNewTask}: Props) => {
     const [value, setValue] = useState<string>("");
 
     const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -9,7 +13,8 @@ const Form = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        console.log(value);
+        addNewTask(value);
+        setValue("");
     }
 
     return (

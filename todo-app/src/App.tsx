@@ -42,11 +42,20 @@ const App = () => {
     }))
   }
 
+  const addNewTask = (name: string) => {
+    setTasks(prevTasks => [...prevTasks, {
+      name,
+      createdAt: new Date(),
+      finishedAt: null,
+      id: uuidv4()
+    }])
+  }
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-lg-6 col-md-8">
-          <Form />
+          <Form addNewTask={addNewTask} />
           <Tasks tasks={tasks} finishTask={finishTask} reopenTask={reopenTask} />
         </div>
       </div>
