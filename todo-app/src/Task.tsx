@@ -2,9 +2,10 @@ import { SingleTask } from "./types/task";
 
 interface Props {
     task: SingleTask;
+    finishTask: (taskId: string) => void;
 }
 
-const Task = ({task}: Props) => {
+const Task = ({task, finishTask}: Props) => {
   return (
     <li className="card mt-3">
         <div className="card-body">
