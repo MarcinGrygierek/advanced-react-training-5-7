@@ -1,28 +1,24 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Card } from "./Card";
+import { useForm } from "./hooks/useForm";
 
 interface Props {
     addNewTask: (name: string, description: string) => void;
 }
 
+interface FormValues {
+    name: string;
+    description: string;
+}
+
 const Form = ({addNewTask}: Props) => {
-    const [value, setValue] = useState<string>("");
-    const [description, setDescription] = useState<string>("");
+    const {values, handleChange, handleSubmit} = useForm<FormValues>({
+        name: '',
+        description: ''
+    })
 
-    const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-       setValue(e.target.value);
-    }
-
-    const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setDescription(e.target.value);
-     }
- 
-
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        addNewTask(value, description);
-        setValue("");
-        setDescription("");
+    const submit = (values: FormValues) => {
+        addNewTask(values.name, values.description);
     }
 
     return (
@@ -30,12 +26,12 @@ const Form = ({addNewTask}: Props) => {
         main
         title='Create new task'
         as='div'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={e => handleSubmit(e, submit)}>
                 <div className="input-group mb-3">
-                    <input value={value} onChange={handleValueChange} type="text" className="form-control" placeholder="Task name" aria-label="Task name" aria-describedby="button-addon2" />
+                    <input name='name' value={values.name} onChange={handleChange} type="text" className="form-control" placeholder="Task name" aria-label="Task name" aria-describedby="button-addon2" />
                     <button className="btn btn-primary" type="submit" id="button-addon2">Create</button>
                 </div>
-                <textarea name='description' value={description} onChange={handleDescriptionChange} className="form-control" rows={3}></textarea>
+                <textarea name='description' value={values.description} onChange={handleChange} className="form-control" rows={3}></textarea>
             </form>
         </Card>
     );
