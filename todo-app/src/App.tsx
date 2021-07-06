@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { AppContainer } from './AppContainer';
 import { Form } from './Form';
 import { Tasks } from './Tasks';
 import { SingleTask } from './types/task';
@@ -38,14 +39,10 @@ const App = () => {
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-6 col-md-8">
+        <AppContainer>
           <Form addNewTask={addNewTask} />
           <Tasks tasks={tasks} finishTask={finishTask} reopenTask={reopenTask} />
-        </div>
-      </div>
-  </div>
+        </AppContainer>
   );
 }
 

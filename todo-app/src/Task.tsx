@@ -1,4 +1,5 @@
 import { differenceInSeconds } from "date-fns";
+import { Card } from "./Card";
 import { SingleTask } from "./types/task";
 
 interface Props {
@@ -16,10 +17,8 @@ const Task = ({task, finishTask, reopenTask}: Props) => {
     
 
     return (
-        <li className="card mt-3">
-            <div className="card-body">
-                <h2 className="cart-title">{task.name}</h2>
-                <p>Created at: {task.createdAt.toLocaleString()}</p>
+        <Card title={task.name} as='li'>
+            <p>Created at: {task.createdAt.toLocaleString()}</p>
                 {task.finishedAt && <>
                     <p>Finished at: {task.finishedAt.toLocaleString()}</p>
                     <p>Elapsed time <div className="badge bg-primary">{calculateDifference()} s</div></p>
@@ -28,8 +27,8 @@ const Task = ({task, finishTask, reopenTask}: Props) => {
                 {task.finishedAt 
                 ? <button className='btn btn-lg btn-secondary' onClick={() => reopenTask(task.id)}>Reopen</button>  
                 : <button className='btn btn-lg btn-success' onClick={() => finishTask(task.id)}>Close</button> }
-            </div>
-        </li>
+         
+        </Card>
     )
 }
 {/* 
