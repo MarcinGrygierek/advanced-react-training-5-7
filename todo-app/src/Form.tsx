@@ -23,9 +23,9 @@ const Form = ({addNewTask}: Props) => {
 
     return (
         <Card 
-        main
-        title='Create new task'
-        as='div'>
+            main
+            title='Create new task'
+            as='div'>
             <form onSubmit={e => handleSubmit(e, submit)}>
                 <div className="input-group mb-3">
                     <input name='name' value={values.name} onChange={handleChange} type="text" className="form-control" placeholder="Task name" aria-label="Task name" aria-describedby="button-addon2" />

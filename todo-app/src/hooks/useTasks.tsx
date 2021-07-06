@@ -1,46 +1,29 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
-import { SingleTask } from "../types/task";
+import { useDispatch, useSelector } from "react-redux";
+import { closeTask, createTask, openTask } from "../features/tasks/tasks-slice";
+import { RootState } from "../store";
 
 export function useTasks() {
-    const [tasks, setTasks] = useState<SingleTask[]>([]);
+  const dispatch = useDispatch();
+  const tasks = useSelector((state: RootState) => state.tasks.items);
 
     const finishTask = (taskId: string) => {
-      setTasks(prevTasks => prevTasks.map(task => {
-        if(task.id === taskId) return {
-          ...task,
-          finishedAt: new Date()
-        };
-        return task;
-      }))
+      dispatch(closeTask(taskId));
     }
   
     
     const reopenTask = (taskId: string) => {
-      setTasks(prevTasks => prevTasks.map(task => {
-        if(task.id === taskId) return {
-          ...task,
-          finishedAt: null
-        };
-        return task;
-      }))
+      dispatch(openTask(taskId));
     }
   
     const addNewTask = (name: string, description: string) => {
-      setTasks(prevTasks => [...prevTasks, {
-        name,
-        description,
-        createdAt: new Date(),
-        finishedAt: null,
-        id: uuidv4()
-      }])
+       dispatch(createTask({ name, description }));
     }
 
     return {
         tasks, 
-        finishTask, 
+        finishTask,
         reopenTask,
-        addNewTask
+        addNewTask, 
     }
   
 }
