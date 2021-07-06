@@ -18,6 +18,7 @@ const Task = ({task, finishTask, reopenTask}: Props) => {
 
     return (
         <Card title={task.name} as='li'>
+            {task.description && <p><small>{task.description}</small></p>}
             <p>Created at: {task.createdAt.toLocaleString()}</p>
                 {task.finishedAt && <>
                     <p>Finished at: {task.finishedAt.toLocaleString()}</p>
@@ -31,13 +32,5 @@ const Task = ({task, finishTask, reopenTask}: Props) => {
         </Card>
     )
 }
-{/* 
-        <div className="card mt-3">
-          <div className="card-body">
-            <h2 className="cart-title">Closed task</h2>
-            <p>Elapsed time <div className="badge bg-primary">00:10</div></p>
-          
-          </div>
-        </div> */}
 
 export { Task };

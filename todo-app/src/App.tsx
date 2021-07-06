@@ -29,9 +29,10 @@ const App = () => {
     }))
   }
 
-  const addNewTask = (name: string) => {
+  const addNewTask = (name: string, description: string) => {
     setTasks(prevTasks => [...prevTasks, {
       name,
+      description,
       createdAt: new Date(),
       finishedAt: null,
       id: uuidv4()
