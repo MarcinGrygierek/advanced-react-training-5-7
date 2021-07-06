@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const getMyIP = createAsyncThunk(
+export const getMyIP = createAsyncThunk<string>(
     'myName/getMyIP',
     async () => {
         const res = await fetch('https://api.ipify.org/?format=json');
@@ -24,14 +24,14 @@ export const myNameSlice = createSlice({
             state.offset++;
         }
     },
-    extraReducers: {
-        [getMyIP.pending as any]: (state, action) => {
+    extraReducers: (builder) => {
+        builder.addCase(getMyIP.pending,  (state, action) => {
             state.loading = true;
-        },
-        [getMyIP.fulfilled as any]: (state, action) => {
+        });
+        builder.addCase(getMyIP.fulfilled,  (state, action) => {
             state.ip = action.payload;
             state.loading = false;
-        }
+        })
     }
 })
 
