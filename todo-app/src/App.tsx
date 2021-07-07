@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Link, Switch, Route, Redirect, useHistory, useParams} from 'react-router-dom';
+import { BrowserRouter as Router, Link, NavLink, Switch, Route, Redirect, useHistory, useParams, useLocation} from 'react-router-dom';
 import { AppContainer } from './AppContainer';
 import { Form } from './Form';
 import { useTasks } from './hooks/useTasks';
@@ -36,6 +36,7 @@ const About = () => {
 
 const Dynamic = () => {
   const { id } = useParams<{id: string}>();
+
   return <h1>Value: {id}</h1>
 }
 
@@ -49,7 +50,7 @@ const App = () => {
               <Link to='/about'>About</Link>
             </li>
             <li>
-              <Link to='/tasks'>Tasks</Link>
+              <NavLink activeClassName='active' activeStyle={{backgroundColor: 'red'}} to='/tasks'>Tasks</NavLink>
             </li>
             <li>
               <Link to='/tasks/10'>Task 10</Link>
