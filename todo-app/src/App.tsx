@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Link, Switch, Route, Redirect, useHistory} from 'react-router-dom';
+import { BrowserRouter as Router, Link, Switch, Route, Redirect, useHistory, useParams} from 'react-router-dom';
 import { AppContainer } from './AppContainer';
 import { Form } from './Form';
 import { useTasks } from './hooks/useTasks';
@@ -34,6 +34,11 @@ const About = () => {
   return <h1>This is my super task manager.</h1>
 }
 
+const Dynamic = () => {
+  const { id } = useParams<{id: string}>();
+  return <h1>Value: {id}</h1>
+}
+
 const App = () => {
   return (
     <Provider store={store}>
@@ -46,15 +51,19 @@ const App = () => {
             <li>
               <Link to='/tasks'>Tasks</Link>
             </li>
+            <li>
+              <Link to='/tasks/10'>Task 10</Link>
+            </li>
 
           </ul>
         </nav>
         <Switch>
           <Route exact path='/' render={() => <Redirect to='/tasks' />} />
           <Route path='/about' component={About} />
-          <Route path='/tasks'>
+          <Route exact path='/tasks'>
             <TaskManager />
           </Route>
+          <Route path='/tasks/:id' component={Dynamic} />
         </Switch>
        
       </Router>
