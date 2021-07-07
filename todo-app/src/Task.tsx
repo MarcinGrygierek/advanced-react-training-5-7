@@ -12,7 +12,8 @@ const Task = ({task, finishTask, reopenTask}: Props) => {
 
     const calculateDifference = () =>  {
         if(!task.finishedAt) return null;
-        return differenceInSeconds(task.finishedAt, task.createdAt);
+        return differenceInSeconds(task.finishedAt, new Date(task.createdAt));
+
     }
     
 
@@ -22,12 +23,12 @@ const Task = ({task, finishTask, reopenTask}: Props) => {
             <p>Created at: {task.createdAt.toLocaleString()}</p>
                 {task.finishedAt && <>
                     <p>Finished at: {task.finishedAt.toLocaleString()}</p>
-                    <p>Elapsed time <div className="badge bg-primary">{calculateDifference()} s</div></p>
+                    <div>Elapsed time <div className="badge bg-primary">{calculateDifference()} s</div></div>
                 </>}
 
                 {task.finishedAt 
-                ? <button className='btn btn-lg btn-secondary' onClick={() => reopenTask(task.id)}>Reopen</button>  
-                : <button className='btn btn-lg btn-success' onClick={() => finishTask(task.id)}>Close</button> }
+                ? <button data-testid="reopen-button" className='btn btn-lg btn-secondary' onClick={() => reopenTask(task.id)}>Reopen</button>  
+                : <button data-testid="close-button" className='btn btn-lg btn-success' onClick={() => finishTask(task.id)}>Close</button> }
          
         </Card>
     )

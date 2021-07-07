@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Task Task renders as closed 1`] = `
+<li
+  className="card mt-3 accent"
+>
+  <div
+    className="card-body"
+  >
+    <h2
+      className="card-title"
+    >
+      Test
+    </h2>
+    <p>
+      <small>
+        Test
+      </small>
+    </p>
+    <p>
+      Created at: 
+      7.07.2021, 07:00:00
+    </p>
+    <p>
+      Finished at: 
+      7.08.2021, 07:00:00
+    </p>
+    <div>
+      Elapsed time 
+      <div
+        className="badge bg-primary"
+      >
+        2678400
+         s
+      </div>
+    </div>
+    <button
+      className="btn btn-lg btn-secondary"
+      data-testid="reopen-button"
+      onClick={[Function]}
+    >
+      Reopen
+    </button>
+  </div>
+</li>
+`;
+
+exports[`Task Task renders as opened 1`] = `
+<li
+  className="card mt-3 accent"
+>
+  <div
+    className="card-body"
+  >
+    <h2
+      className="card-title"
+    >
+      Test
+    </h2>
+    <p>
+      <small>
+        Test
+      </small>
+    </p>
+    <p>
+      Created at: 
+      7.07.2021, 07:00:00
+    </p>
+    <button
+      className="btn btn-lg btn-success"
+      data-testid="close-button"
+      onClick={[Function]}
+    >
+      Close
+    </button>
+  </div>
+</li>
+`;
