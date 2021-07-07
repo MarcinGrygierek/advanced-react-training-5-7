@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from 'uuid';
 import { SingleTask } from "../../types/task";
 
@@ -20,6 +20,15 @@ interface CloseTask {
 interface OpenTask {
     payload: string
 }
+
+export const getTasks = createAsyncThunk<SingleTask[]>(
+    'tasks/getTasks',
+    async () => {
+        const res = await fetch('http://localhost:3001/tasks');
+        const data = await res.json();
+        return data;
+    }
+)
 
 export const tasksSlice = createSlice({
     name: 'tasks',
@@ -55,6 +64,11 @@ export const tasksSlice = createSlice({
                return el;
             })
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getTasks.fulfilled, (state, action) => {
+            state.items = action.payload as any;
+        })
     }
 })
 

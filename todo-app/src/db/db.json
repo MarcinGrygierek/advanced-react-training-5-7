@@ -1,0 +1,17 @@
+{
+    "tasks": [
+        {
+            "id": "123addd",
+            "name": "Lorem",
+            "description": "Description of the task",
+            "createdAt": "2021-07-07T07:27:51.070Z"
+        }, 
+        {
+            "id": "112323d",
+            "name": "Dolor sit amet",
+            "description": "Description of the task",
+            "createdAt": "2021-07-07T07:27:51.070Z",
+            "finishedAt": "2021-07-07T08:27:51.070Z"
+        }
+    ]
+}
