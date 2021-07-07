@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Card renders correctly as div 1`] = `
+<div
+  className="card mt-3 accent"
+>
+  <div
+    className="card-body"
+  >
+    <h2
+      className="card-title"
+    >
+      Title
+    </h2>
+    Card description
+  </div>
+</div>
+`;
+
+exports[`Card Card renders correctly as li 1`] = `
+<li
+  className="card mt-3 accent"
+>
+  <div
+    className="card-body"
+  >
+    <h2
+      className="card-title"
+    >
+      Title
+    </h2>
+    Card description
+  </div>
+</li>
+`;
+
+exports[`Card Card renders correctly as main 1`] = `
+<li
+  className="card mt-3 main"
+>
+  <div
+    className="card-body"
+  >
+    <h1
+      className="card-title"
+    >
+      Title
+    </h1>
+    Card description
+  </div>
+</li>
+`;

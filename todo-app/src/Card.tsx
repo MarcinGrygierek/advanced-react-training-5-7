@@ -1,3 +1,5 @@
+import { getClassByType } from "./utils/theme";
+
 interface Props {
     as: 'div' | 'li';
     children: React.ReactNode;
@@ -6,7 +8,7 @@ interface Props {
 }
 
 export const Card = ({as, children, title, main}: Props) => {
-    const className = "card mt-3";
+    const className = `card mt-3 ${getClassByType(main ? 'primary' : 'secondary')}`;
 
     const content = <div className='card-body'>
         {main ? <h1 className='card-title'>{title}</h1> : <h2 className='card-title'>{title}</h2>}
