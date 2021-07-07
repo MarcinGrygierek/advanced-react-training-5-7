@@ -1,18 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from 'uuid';
-import { SingleTask, TaskRes, TaskToCreate } from "../../types/task";
-
-interface TasksState {
-    items: SingleTask[]
-}
-
-interface CloseTask {
-    payload: string
-}
-
-interface OpenTask {
-    payload: string
-}
+import { SingleTask, TaskRes, TaskStatusReq, TaskToCreate } from "../../types/task";
 
 const mapTask = (res: TaskRes): SingleTask => {
     return {
@@ -22,11 +10,23 @@ const mapTask = (res: TaskRes): SingleTask => {
     };
 }
 
+const callApi = async<T, D = {}>(path: string, method: 'POST' | 'GET' | 'PATCH', payload?: D): Promise<T> => {
+    const res = await fetch(`http://localhost:3001/${path}`, {
+        method,
+        body: JSON.stringify(payload),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const data: T = await res.json();
+    return data;
+}
+
+
 export const getTasks = createAsyncThunk<SingleTask[]>(
     'tasks/getTasks',
     async () => {
-        const res = await fetch('http://localhost:3001/tasks');
-        const data: TaskRes[] = await res.json();
+        const data = await callApi<TaskRes[]>('tasks', 'GET');
         return data.map(mapTask);
     }
 )
@@ -42,14 +42,29 @@ export const createTask = createAsyncThunk<SingleTask, TaskToCreate>(
             finishedAt: null,
             id: uuidv4()
         }
-        const res = await fetch('http://localhost:3001/tasks', {
-            method: 'POST',
-            body: JSON.stringify(newTask),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        const data: TaskRes = await res.json();
+        const data = await callApi<TaskRes, SingleTask>('tasks', 'POST', newTask);
+        return mapTask(data);
+    }
+)
+
+export const closeTask = createAsyncThunk<SingleTask, string>(
+    'tasks/closeTask',
+    async (taskId: string) => {
+        const taskPatch: TaskStatusReq = {
+            finishedAt: new Date()
+        }
+        const data = await callApi<TaskRes, TaskStatusReq>(`tasks/${taskId}`, 'PATCH', taskPatch);
+        return mapTask(data);
+    }
+)
+
+export const openTask = createAsyncThunk<SingleTask, string>(
+    'tasks/openTask',
+    async (taskId: string) => {
+        const taskPatch: TaskStatusReq = {
+            finishedAt: null
+        }
+        const data = await callApi<TaskRes, TaskStatusReq>(`tasks/${taskId}`, 'PATCH', taskPatch);
         return mapTask(data);
     }
 )
@@ -59,35 +74,25 @@ export const tasksSlice = createSlice({
     initialState: {
         items: []
     },
-    reducers: {
-        closeTask: (state: TasksState, action: CloseTask) => {
-            state.items = state.items.map(el => {
-               if(el.id === action.payload) return {
-                   ...el,
-                   finishedAt: new Date()
-               }
-               return el;
-            })
-        },
-        openTask: (state: TasksState, action: OpenTask) => {
-            state.items = state.items.map(el => {
-               if(el.id === action.payload) return {
-                   ...el,
-                   finishedAt: null
-               }
-               return el;
-            })
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getTasks.fulfilled, (state, action) => {
             state.items = action.payload as any;
         })
         builder.addCase(createTask.fulfilled, (state, action) => {
             state.items = [...state.items, action.payload] as any;
-            console.log(action);
+        })
+        builder.addCase(closeTask.fulfilled, (state, action) => {
+            state.items = (state.items as any).map((item: SingleTask) => {
+                if(item.id === action.payload.id) return action.payload;
+                return item;
+            })
+        })
+        builder.addCase(openTask.fulfilled, (state, action) => {
+            state.items = (state.items as any).map((item: SingleTask) => {
+                if(item.id === action.payload.id) return action.payload;
+                return item;
+            })
         })
     }
 })
-
-export const { closeTask, openTask } = tasksSlice.actions;

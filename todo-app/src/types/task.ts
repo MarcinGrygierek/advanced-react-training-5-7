@@ -18,3 +18,7 @@ export interface TaskToCreate {
     name: string;
     description: string;
 }
+
+export interface TaskStatusReq {
+    finishedAt: Date | null;
+}
