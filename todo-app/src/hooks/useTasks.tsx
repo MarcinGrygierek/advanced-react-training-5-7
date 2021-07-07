@@ -22,7 +22,7 @@ export function useTasks() {
     }
   
     const addNewTask = (name: string, description: string) => {
-       dispatch(createTask({ name, description }));
+       dispatch(createTask({name, description}));
     }
 
     return {

@@ -1,17 +1,46 @@
 {
-    "tasks": [
-        {
-            "id": "123addd",
-            "name": "Lorem",
-            "description": "Description of the task",
-            "createdAt": "2021-07-07T07:27:51.070Z"
-        }, 
-        {
-            "id": "112323d",
-            "name": "Dolor sit amet",
-            "description": "Description of the task",
-            "createdAt": "2021-07-07T07:27:51.070Z",
-            "finishedAt": "2021-07-07T08:27:51.070Z"
-        }
-    ]
+  "tasks": [
+    {
+      "name": "asd",
+      "description": "asd",
+      "createdAt": "2021-07-07T08:11:56.070Z",
+      "finishedAt": null,
+      "id": "8d02a471-eebd-4e02-a561-e13ff45b8f46"
+    },
+    {
+      "name": "asd",
+      "description": "asd",
+      "createdAt": "2021-07-07T08:14:16.448Z",
+      "finishedAt": null,
+      "id": "94e61ff3-315c-49f2-a3f9-405ab76ab28e"
+    },
+    {
+      "name": "asd",
+      "description": "asd",
+      "createdAt": "2021-07-07T08:14:25.931Z",
+      "finishedAt": null,
+      "id": "92782c78-ca06-4ec0-ae51-2b782e5ce548"
+    },
+    {
+      "name": "asd",
+      "description": "asd",
+      "createdAt": "2021-07-07T08:17:05.679Z",
+      "finishedAt": null,
+      "id": "00ad4f64-fc7f-4655-a7c2-d7fcecd13d68"
+    },
+    {
+      "name": "Lorem",
+      "description": "ipsum",
+      "createdAt": "2021-07-07T08:18:47.195Z",
+      "finishedAt": null,
+      "id": "99974c38-8828-4519-887e-5b9a0d7e10ca"
+    },
+    {
+      "name": "sdfsdfsdfs",
+      "description": "sdfsdf",
+      "createdAt": "2021-07-07T08:21:31.444Z",
+      "finishedAt": null,
+      "id": "6d6550e7-27dc-42a0-85f8-dfa8e0fcbb64"
+    }
+  ]
 }
