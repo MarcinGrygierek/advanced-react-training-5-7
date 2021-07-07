@@ -30,10 +30,10 @@ const initialState: FooState = {
 const fooReducer = (state: FooState, action: Action) => {
     switch(action.type) {
         case FooAction.INCREMENT: {
-            return {...state, offset: state.offset + 1}
+            return {...state, offset: state.offset + action.payload}
         }
         case FooAction.DECREMENT: {
-            return {...state, offset: state.offset - 1}
+            return {...state, offset: state.offset - action.payload}
         }
     }
 }
@@ -43,7 +43,7 @@ const Foo = () => {
     const name = "Marcin";
 
     return <>
-    <h1>{name.slice(0, (state as any).offset)}</h1>
+    <h1>{name.slice(0, state.offset)}</h1>
     <button onClick={() => dispatch({type: FooAction.INCREMENT, payload: 1})}>+1</button>
     <button onClick={() => dispatch({type: FooAction.DECREMENT, payload: 1})}>-1</button>
 </>
